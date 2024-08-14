@@ -46,8 +46,11 @@ Pour démarrer l'application, exécutez la commande suivante :
 ```bash
 npm start
 ```
-Ou
-
+Ou vous accedez au dossier src
+```bash
+cd src
+```
+aprés
 ```bash
 node index.js
 ```
