@@ -1,5 +1,5 @@
 {
-  "name": "survey-app",
+  "name": "abc_corporation_app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,9 +7,11 @@
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "keywords": [],
+  "author": "Ehya Ag Mohamed",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "mongodb": "^6.8.0"
+    "mongod": "^2.0.0"
   }
 }
