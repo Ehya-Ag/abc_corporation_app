@@ -1,4 +1,3 @@
-// index.js
 const { connectDB, getDB } = require('./config/db');
 
 const { insertSurvey, getAllSurveys, getSurveyById, updateSurvey, deleteSurvey } = require('./surveyModule');
