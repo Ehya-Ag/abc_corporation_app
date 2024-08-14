@@ -1,26 +1,25 @@
-//  * // db.js */
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017';
-const client = new MongoClient(uri);
+const url = 'mongodb://localhost:27017';
+const dbName = 'abc_corporation';
 
-let db;
+let db = null;
 
 async function connectDB() {
+    if (db) {
+        return db;
+    }
+
+    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
     try {
         await client.connect();
-        db = client.db('abc_corporation');
-        console.log('Connecté à la base de données MongoDB');
+        console.log("Connecté à la base de données MongoDB");
+        db = client.db(dbName);
+        return db;
     } catch (error) {
-        console.error('Erreur de connexion à la base de données', error);
+        console.error("Erreur lors de la connexion à la base de données:", error);
+        throw error;  // Relancer l'erreur pour qu'elle soit gérée ailleurs si nécessaire
     }
 }
 
-function getDB() {
-    if (!db) {
-        throw new Error('La base de données n\'est pas encore connectée');
-    }
-    return db;
-}
-
-module.exports = { connectDB, getDB };
+module.exports = { connectDB };
