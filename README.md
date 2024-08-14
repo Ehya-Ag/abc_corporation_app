@@ -10,7 +10,7 @@ ABC_CORPORATION_APP est une application JavaScript simple permettant de gérer l
 Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 - [Node.js](https://nodejs.org/) (version 12 ou supérieure)
-- [MongoDB](https://www.mongodb.com/try/download/community) (version 4.0 ou supérieure)
+- [MongoDB](https://www.mongodb.com/try/download/community) (version 2.0 ou supérieure)
 
 ## Installation
 
@@ -19,7 +19,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 1. **Clonez le repository :**
 
     ```bash
-    git clone <URL_DU_REPOSITORY>
+    git clone (https://github.com/Ehya-Ag/abc_corporation_app.git)
     ```
 
 2. **Accédez au dossier du projet :**
