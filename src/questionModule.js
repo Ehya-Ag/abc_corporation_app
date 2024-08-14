@@ -1,71 +1,100 @@
-const { MongoClient, ObjectId } = require('mongodb');
-
-// URL de connexion MongoDB
-const url = 'mongodb://localhost:27017';
-const dbName = 'abc_corporation';
-let db;
-
-// Connexion à MongoDB
-async function connectDB() {
-    if (!db) {
-        const client = new MongoClient(url);
-        await client.connect();
-        db = client.db(dbName);
-    }
-    return db;
-}
+const { connectDB } = require('./config/db');
 
 // Fonction pour créer une question
 async function createQuestion(idQuestion, surveyId, title, type, options = null) {
-    const db = await connectDB();
-    const newQuestion = {
-        idQuestion,
-        surveyId,
-        title,
-        type,
-        options,
-    };
-    const result = await db.collection('questions').insertOne(newQuestion);
-    console.log("Question créée avec succès:", result.ops[0]);
+    try {
+        const db = await connectDB();
+
+        // Vérifier si l'ID de la question existe déjà
+        const existingQuestion = await db.collection('questions').findOne({ idQuestion });
+        if (existingQuestion) {
+            console.log(`Une question avec l'ID ${idQuestion} existe déjà.`);
+            return;
+        }
+
+        const newQuestion = {
+            idQuestion,
+            surveyId,
+            title,
+            type,
+            options,
+        };
+        const result = await db.collection('questions').insertOne(newQuestion);
+        console.log("Question créée avec succès:", result.ops[0]);
+    } catch (err) {
+        console.error("Erreur lors de la création de la question:", err);
+    }
 }
 
 // Fonction pour lire toutes les questions
 async function readAllQuestions() {
-    const db = await connectDB();
-    const questions = await db.collection('questions').find().toArray();
-    console.log("Liste des questions:", questions);
+    try {
+        const db = await connectDB();
+        const questions = await db.collection('questions').find().toArray();
+        console.log("Liste des questions:", questions);
+    } catch (err) {
+        console.error("Erreur lors de la récupération des questions:", err);
+    }
 }
 
 // Fonction pour lire une question par ID
 async function readQuestionById(idQuestion) {
-    const db = await connectDB();
-    const question = await db.collection('questions').findOne({ idQuestion });
-    if (question) {
-        console.log("Question trouvée:", question);
-    } else {
-        console.log("Question non trouvée pour l'ID:", idQuestion);
+    try {
+        const db = await connectDB();
+        const question = await db.collection('questions').findOne({ idQuestion });
+        if (question) {
+            console.log("Question trouvée:", question);
+        } else {
+            console.log("Question non trouvée pour l'ID:", idQuestion);
+        }
+    } catch (err) {
+        console.error("Erreur lors de la récupération de la question:", err);
     }
 }
 
 // Fonction pour mettre à jour une question
 async function updateQuestion(idQuestion, updatedData) {
-    const db = await connectDB();
-    const result = await db.collection('questions').updateOne({ idQuestion }, { $set: updatedData });
-    if (result.matchedCount > 0) {
-        console.log("Question mise à jour avec succès");
-    } else {
-        console.log("Question non trouvée pour l'ID:", idQuestion);
+    try {
+        const db = await connectDB();
+
+        // Vérifier si l'ID de la question existe
+        const existingQuestion = await db.collection('questions').findOne({ idQuestion });
+        if (!existingQuestion) {
+            console.log(`Aucune question trouvée avec l'ID ${idQuestion}.`);
+            return;
+        }
+
+        const result = await db.collection('questions').updateOne({ idQuestion }, { $set: updatedData });
+        if (result.matchedCount > 0) {
+            console.log("Question mise à jour avec succès");
+        } else {
+            console.log("Question non trouvée pour l'ID:", idQuestion);
+        }
+    } catch (err) {
+        console.error("Erreur lors de la mise à jour de la question:", err);
     }
 }
 
 // Fonction pour supprimer une question
 async function deleteQuestion(idQuestion) {
-    const db = await connectDB();
-    const result = await db.collection('questions').deleteOne({ idQuestion });
-    if (result.deletedCount > 0) {
-        console.log("Question supprimée avec succès");
-    } else {
-        console.log("Question non trouvée pour l'ID:", idQuestion);
+    try {
+        const db = await connectDB();
+
+        // Vérifier si l'ID de la question existe
+        const existingQuestion = await db.collection('questions').findOne({ idQuestion });
+        if (!existingQuestion) {
+            console.log(`Aucune question trouvée avec l'ID ${idQuestion}.`);
+            return;
+        }
+
+        const result = await db.collection('questions').deleteOne({ idQuestion });
+        if (result.deletedCount > 0) {
+            console.log("Question supprimée avec succès");
+        } else {
+            console.log("Aucune question trouvée pour l'ID:", idQuestion);
+        }
+    } catch (err) {
+        console.error("Erreur lors de la suppression de la question:", err);
     }
 }
 
