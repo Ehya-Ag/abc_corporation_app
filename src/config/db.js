@@ -1,9 +1,7 @@
-// /**
-//  * Ce fichier configure et établit la connexion à la DB MongoDB
 //  * // db.js */
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017'; // L'URI de la base de données MongoDB
+const uri = 'mongodb://localhost:27017';
 const client = new MongoClient(uri);
 
 let db;
