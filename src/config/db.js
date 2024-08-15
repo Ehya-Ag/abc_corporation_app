@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'abc_corporation';
+const dbName = 'abc_survey_app';
 
 let db = null;
 
@@ -10,7 +10,7 @@ async function connectDB() {
         return db;
     }
 
-    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
+    const client = new MongoClient(url);
     try {
         await client.connect();
         console.log("Connecté à la base de données MongoDB");
@@ -18,7 +18,7 @@ async function connectDB() {
         return db;
     } catch (error) {
         console.error("Erreur lors de la connexion à la base de données:", error);
-        throw error;  // Relancer l'erreur pour qu'elle soit gérée ailleurs si nécessaire
+        throw error;
     }
 }
 
