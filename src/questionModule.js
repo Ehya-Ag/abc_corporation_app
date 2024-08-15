@@ -1,31 +1,35 @@
 const { connectDB } = require('./config/db');
 
 // Fonction pour créer une question
-async function createQuestion(idQuestion, surveyId, title, type, options = null) {
+async function createQuestion(idQuestion, surveyId, questionText, options) {
     try {
         const db = await connectDB();
 
-        // Vérifier si l'ID de la question existe déjà
+        // Vérification que l'ID de la question n'existe pas déjà
         const existingQuestion = await db.collection('questions').findOne({ idQuestion });
         if (existingQuestion) {
             console.log(`Une question avec l'ID ${idQuestion} existe déjà.`);
             return;
         }
 
+        // Vérification que le tableau options existe et n'est pas vide
+        if (!options || options.length === 0) {
+            console.log("Les options doivent être fournies et ne peuvent pas être vides.");
+            return;
+        }
+
         const newQuestion = {
             idQuestion,
             surveyId,
-            title,
-            type,
-            options,
+            questionText,
+            options
         };
-        const result = await db.collection('questions').insertOne(newQuestion);
-        console.log("Question créée avec succès:", result.ops[0]);
+        await db.collection('questions').insertOne(newQuestion);
+        console.log("Question créée avec succès:", newQuestion);
     } catch (err) {
         console.error("Erreur lors de la création de la question:", err);
     }
 }
-
 // Fonction pour lire toutes les questions
 async function readAllQuestions() {
     try {
