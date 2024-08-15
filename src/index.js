@@ -4,8 +4,7 @@ const { insertSurvey, getAllSurveys, getSurveyById, updateSurvey, deleteSurvey }
 const { createAnswer, readAllAnswers, readAnswerById, updateAnswer, deleteAnswer } = require('./answerModule');
 const { createQuestion, readAllQuestions, readQuestionById, updateQuestion, deleteQuestion } = require('./questionModule');
 
-//Scénario d'usage pour les enquêtes (surveys)
-console.log("=== Scénarios d'usage pour les enquêtes ===");
+
 insertSurvey({
     idSurvey: 2, 
     name: "Enquête de Satisfaction 002",
@@ -18,13 +17,11 @@ insertSurvey({
 });
 getAllSurveys();
 getSurveyById(1);
-updateSurvey(2, { name: "Enquête de Satisfaction 002 - Mise à Nuit", description: "Mise à jour de project de ehya." });
+updateSurvey(2, { name: "Enquête de Satisfaction 002 - Mise à Nuit", description: "Mise à jour de project." });
 deleteSurvey(2);
 getAllSurveys();
 
 
-// Scénario d'usage pour les questions (questions)
-console.log("=== Scénarios d'usage pour les questions ===");
 createQuestion(4, "Quelle est votre satisfaction globale ?", "rating", { minValue: 1, maxValue: 10, step: 1 });
 readAllQuestions();
 readQuestionById(1);
@@ -32,10 +29,8 @@ updateQuestion(4, { title: "Comment évalueriez-vous notre service ? (Mise à jo
 deleteQuestion(4);
 readAllQuestions();
 
-// Scénario d'usage pour les réponses (answers)
-console.log("=== Scénarios d'usage pour les réponses ===");
 createAnswer(2, 1,[
-    { title: "Très ok" },
+    { title: "Très bien" },
 ]);
 readAllAnswers();
 readAnswerById(1);
