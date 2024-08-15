@@ -1,4 +1,4 @@
-# ABC-SURVEY-APP-MAIN
+# ABC-SURVEY-APP
 
 ## Description
 
@@ -321,13 +321,11 @@ updateAnswer(1, { options: [
 deleteAnswer(1);
 ```
 
----
-
-Cela regroupe les fonctions par module tout en expliquant leur utilisation et leur rôle dans le projet.
 
 ## Authors
 
 Ehya Ag Mohamed
+
 lien du projet Github : (https://github.com/users/Ehya-Ag/projects/9)
 
 ---
