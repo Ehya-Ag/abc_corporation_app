@@ -6,7 +6,7 @@ const { createQuestion, readAllQuestions, readQuestionById, updateQuestion, dele
 
 
 insertSurvey({
-    idSurvey: 2, 
+    idSurvey: 1, 
     name: "Enquête de Satisfaction 002",
     description: "Deuxième enquête visant à évaluer la satisfaction des clients.",
     createdAt: "2024-08-13T10:00:00Z",
@@ -17,7 +17,14 @@ insertSurvey({
 });
 getAllSurveys();
 getSurveyById(1);
-updateSurvey(2, { name: "Enquête de Satisfaction 002 - Mise à Nuit", description: "Mise à jour de project." });
+updateSurvey(1, { name: "Enquête de Satisfaction 002 - Mise à jour", 
+    description: "Mise à jour de project.",
+    createdAt: "2024-08-13T10:00:00Z",
+    createdBy: {
+        employeeName: "Oumar ndjiay",
+        employeeRole: "Chef de projet"
+    }
+ });
 deleteSurvey(2);
 getAllSurveys();
 
@@ -34,6 +41,6 @@ createAnswer(2, 1,[
 ]);
 readAllAnswers();
 readAnswerById(1);
-updateAnswer(1, { options: [{ title: "Extrêmement satisfait" }, { title: "Satisfait" }, { title: "Neutre" }] });
+updateAnswer(1, { options: [{ title: "Extrêmement satisfait" }] });
 deleteAnswer(1);
 readAllAnswers();
