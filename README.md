@@ -325,8 +325,7 @@ deleteAnswer(1);
 ## Authors
 
 Ehya Ag Mohamed
-
-lien du projet Github : (https://github.com/users/Ehya-Ag/projects/9)
+[lien de mon profil](https://github.com/Ehya-Ag)
 
 ---
 
