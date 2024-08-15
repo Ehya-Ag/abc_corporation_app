@@ -1,9 +1,8 @@
-
-# ABC_CORPORATION_APP
+# ABC-SURVEY-APP-MAIN
 
 ## Description
 
-ABC_CORPORATION_APP est une application JavaScript simple permettant de gérer les fiches d'enquête de satisfaction des clients. L'application utilise une base de données MongoDB pour stocker les données et permet d'effectuer des opérations CRUD (Create, Read, Update, Delete) sur ces fiches d'enquête, questions et réponses.
+Survey App est une application JavaScript simple permettant de gérer les fiches d'enquête de satisfaction des clients. L'application utilise une base de données MongoDB pour stocker les données et permet d'effectuer des opérations CRUD (Create, Read, Update, Delete) sur ces fiches d'enquête, questions et réponses.
 
 ## Prérequis
 
@@ -46,18 +45,20 @@ Pour démarrer l'application, exécutez la commande suivante :
 ```bash
 npm start
 ```
-Ou vous accedez au dossier src
+Ou en accedant au dossier src
 ```bash
 cd src
 ```
-aprés
+
 ```bash
 node index.js
 ```
 
 ## Documentation des Fonctions
 
-### `insertSurvey(survey)`
+### Module `surveyModule`
+
+#### `insertSurvey(survey)`
 
 **Description** : Ajoute une nouvelle enquête dans la base de données.
 
@@ -88,7 +89,7 @@ insertSurvey({
 });
 ```
 
-### `getAllSurveys()`
+#### `getAllSurveys()`
 
 **Description** : Récupère toutes les enquêtes présentes dans la base de données.
 
@@ -102,7 +103,7 @@ insertSurvey({
 getAllSurveys();
 ```
 
-### `getSurveyById(idSurvey)`
+#### `getSurveyById(idSurvey)`
 
 **Description** : Récupère une enquête spécifique par son identifiant.
 
@@ -117,7 +118,7 @@ getAllSurveys();
 getSurveyById(1);
 ```
 
-### `updateSurvey(idSurvey, updateData)`
+#### `updateSurvey(idSurvey, updateData)`
 
 **Description** : Met à jour les informations d'une enquête existante.
 
@@ -133,7 +134,7 @@ getSurveyById(1);
 updateSurvey(2, { name: "Enquête de Satisfaction 002 - Mise à Jour", description: "Mise à jour du projet par Ehya." });
 ```
 
-### `deleteSurvey(idSurvey)`
+#### `deleteSurvey(idSurvey)`
 
 **Description** : Supprime une enquête de la base de données par son identifiant.
 
@@ -148,7 +149,9 @@ updateSurvey(2, { name: "Enquête de Satisfaction 002 - Mise à Jour", descripti
 deleteSurvey(2);
 ```
 
-### `createQuestion(idSurvey, title, type, options)`
+### Module `questionModule`
+
+#### `createQuestion(idSurvey, title, type, options)`
 
 **Description** : Ajoute une nouvelle question à une enquête.
 
@@ -166,7 +169,7 @@ deleteSurvey(2);
 createQuestion(4, "Quelle est votre satisfaction globale ?", "rating", { minValue: 1, maxValue: 10, step: 1 });
 ```
 
-### `readAllQuestions()`
+#### `readAllQuestions()`
 
 **Description** : Récupère toutes les questions présentes dans la base de données.
 
@@ -181,7 +184,7 @@ readAllQuestions();
 
 ```
 
-### `readQuestionById(idQuestion)`
+#### `readQuestionById(idQuestion)`
 
 **Description** : Récupère une question spécifique par son identifiant.
 
@@ -197,7 +200,7 @@ readQuestionById(1);
 
 ```
 
-### `updateQuestion(idQuestion, updateData)`
+#### `updateQuestion(idQuestion, updateData)`
 
 **Description** : Met à jour les informations d'une question existante.
 
@@ -213,7 +216,7 @@ readQuestionById(1);
 updateQuestion(4, { title: "Comment évalueriez-vous notre service ? (Mise à jour)" });
 ```
 
-### `deleteQuestion(idQuestion)`
+#### `deleteQuestion(idQuestion)`
 
 **Description** : Supprime une question de la base de données par son identifiant.
 
@@ -228,7 +231,9 @@ updateQuestion(4, { title: "Comment évalueriez-vous notre service ? (Mise à jo
 deleteQuestion(4);
 ```
 
-### `createAnswer(idSurvey, idQuestion, options)`
+### Module `answerModule`
+
+#### `createAnswer(idSurvey, idQuestion, options)`
 
 **Description** : Ajoute une nouvelle réponse à une question dans une enquête.
 
@@ -249,7 +254,7 @@ createAnswer(2, 1, [
 ]);
 ```
 
-### `readAllAnswers()`
+#### `readAllAnswers()`
 
 **Description** : Récupère toutes les réponses présentes dans la base de données.
 
@@ -263,7 +268,7 @@ createAnswer(2, 1, [
 readAllAnswers();
 ```
 
-### `readAnswerById(idAnswer)`
+#### `readAnswerById(idAnswer)`
 
 **Description** : Récupère une réponse spécifique par son identifiant.
 
@@ -279,16 +284,15 @@ const answer = readAnswerById(1);
 console.log(answer);
 ```
 
-### `updateAnswer(idAnswer, updateData)`
+#### `updateAnswer(idAnswer, updateData)`
 
 **Description** : Met à jour les informations d'une réponse existante.
 
 **Paramètres** :
-- `idAnswer` (Number) : Identifiant unique de
+- `idAnswer` (Number) : Identifiant unique de la réponse à mettre à jour.
+- `updateData` (Object
 
- la réponse à mettre à jour.
-- `updateData` (Object) : Un objet contenant les nouvelles valeurs pour les propriétés à mettre à jour, telles que :
-  - `options` (Array) : Un tableau d'objets représentant les nouvelles options de réponse.
+) : Un objet contenant les nouvelles valeurs pour les propriétés à mettre à jour.
 
 **Valeur de Retour** : Un message indiquant si la mise à jour a réussi ou a échoué.
 
@@ -296,13 +300,13 @@ console.log(answer);
 
 ```javascript
 updateAnswer(1, { options: [
-    { title: "Extrêmement satisfait" },
-    { title: "Satisfait" },
-    { title: "Neutre" }
+    { title: "Très satisfait" },
+    { title: "Plutôt satisfait" },
+    { title: "Peu satisfait" }
 ] });
 ```
 
-### `deleteAnswer(idAnswer)`
+#### `deleteAnswer(idAnswer)`
 
 **Description** : Supprime une réponse de la base de données par son identifiant.
 
@@ -317,9 +321,14 @@ updateAnswer(1, { options: [
 deleteAnswer(1);
 ```
 
+---
+
+Cela regroupe les fonctions par module tout en expliquant leur utilisation et leur rôle dans le projet.
+
 ## Authors
 
 Ehya Ag Mohamed
+lien du projet Github : (https://github.com/users/Ehya-Ag/projects/9)
 
 ---
 
